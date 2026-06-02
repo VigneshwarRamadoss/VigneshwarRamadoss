@@ -1,6 +1,7 @@
 ## Hi there 👋
 
-Vigneshwar, Co-Founder
+I'm Vigneshwar, Co-Founder of "The Dot" company.
+
 If your SaaS is leaking revenue at onboarding or checkout, I fix that.
 
 I'm a Full-Stack Developer & UI/UX Designer. I don't do general work. I don't build "websites."
