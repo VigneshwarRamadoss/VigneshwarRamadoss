@@ -1,22 +1,24 @@
-## Hi there 👋
+<p align="center">
+  <img src="./assets/profile-hero.svg"
+       alt="Vigneshwar Ramadoss — Technical Founder and Product Engineer"
+       width="100%" />
+</p>
 
-I'm Vigneshwar, Co-Founder of "The Dot" company.
+## What I Build
 
-If your SaaS is leaking revenue at onboarding or checkout, I fix that.
+**Intelligent Systems**  
+Applied AI, automation and decision-oriented software.
 
-I'm a Full-Stack Developer & UI/UX Designer. I don't do general work. I don't build "websites."
+**Product Engineering**  
+End-to-end products across frontend, backend, data and mobile.
 
-I specialize in the two moments that make or break your business, when someone signs up, and when they pay.
+**Interaction Engineering**  
+Interfaces where usability, motion and engineering meet.
 
-Most SaaS founders don't realize they're losing 60-70% of users inside these two flows. Not because the product is bad. Because the experience is broken, bad copy, confusing UI, fragile architecture holding it all together with duct tape.
+---
 
-I come in, find exactly where you're bleeding, and rebuild it.
-
-What you get:
-→ One person who designs AND builds — no handoffs, no finger-pointing
-→ Conversion-first thinking on every decision, not just pretty screens
-→ Clean, scalable code your engineering team can actually inherit
-
-The result: A tighter funnel. More activations. More revenue.
-
-If your onboarding or checkout isn't converting the way it should, that's a fixable problem. Let's fix it.
+<p>
+  <a href="https://www.thedotco.in/">The Dot</a>
+  &nbsp;·&nbsp;
+  <a href="https://www.linkedin.com/in/vigneshwar-ramadoss-2b39b3267/">LinkedIn</a>
+</p>
