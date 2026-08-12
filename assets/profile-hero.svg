@@ -32,7 +32,7 @@
       .pulse { opacity: 0; animation: pulseOnce 1.1s ease-out 3.02s forwards; }
 
       @keyframes heroIn { to { opacity: 1; transform: translateY(0); } }
-      @keyframes revealName { to { width: 570px; } }
+      @keyframes revealName { to { width: 680px; } }
       @keyframes fadeIn { to { opacity: 1; } }
       @keyframes fadeUp { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
       @keyframes drawRole { from { opacity: 0; transform: scaleX(0); } to { opacity: 1; transform: scaleX(1); } }
@@ -44,7 +44,7 @@
         .hero, .name-mask, .role, .role-rule, .statement, .meta, .flow-base, .flow-line, .node, .status, .pulse {
           animation: none !important; opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important;
         }
-        .name-mask { width: 570px; }
+        .name-mask { width: 680px; }
         .pulse { opacity: 0 !important; }
       }
     </style>
