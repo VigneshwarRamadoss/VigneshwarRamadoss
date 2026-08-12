@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/profile-hero.svg?v=2"
+  <img src="./assets/profile-hero-v2.svg"
        alt="Vigneshwar Ramadoss — Technical Founder and Product Engineer"
        width="100%" />
 </p>
