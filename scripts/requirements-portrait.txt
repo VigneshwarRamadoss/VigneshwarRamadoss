@@ -1,0 +1,11 @@
+# Local-only dependencies for portrait photo preprocessing & ASCII conversion
+# Run once locally when updating the portrait photo:
+# pip install -r scripts/requirements-portrait.txt
+# python scripts/prep_photo.py assets/portrait-source.png assets/portrait-prepped.png
+# python scripts/make_ascii_svg.py assets/portrait-prepped.png vignesh-ascii.svg
+
+Pillow>=10.0.0
+numpy>=1.24.0
+opencv-python-headless>=4.8.0
+rembg>=2.0.50
+onnxruntime>=1.16.0
