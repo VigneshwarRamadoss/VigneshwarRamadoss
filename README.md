@@ -4,7 +4,7 @@
 <!-- 01 · HEADER HERO (PROBLEM → SYSTEM → BUILD → SHIP) -->
 <!-- ========================================== -->
 
-<img src="./header.svg" width="100%" alt="Vigneshwar Ramadoss — Co-Founder @ The Dot | Problem → System → Build → Ship" />
+<img src="./header.svg?v=2" width="100%" alt="Vigneshwar Ramadoss — Co-Founder @ The Dot | Problem → System → Build → Ship" />
 
 <br><br>
 
