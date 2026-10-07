@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """
-Generate the responsive header SVG (header.svg).
+Generate the responsive editorial header SVG (header.svg).
 
-Vercel/Linear-inspired aesthetic.
-Focuses on strict composition, hierarchy, and whitespace.
+Clean, static, editorial composition.
+Strict two-column architecture:
+  Left: x=64..650 (Identity, positioning, focus)
+  Right: x=760..1136 (Problem -> System -> Build -> Ship typographic system)
 """
 import os
 import sys
@@ -14,187 +16,115 @@ import theme as T
 OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(T.ROOT, "header.svg")
 
 W = 1200
-H = 380
+H = 440
 
 def generate_header():
+    # Palette
+    BG = "#0D1117"
+    PRIMARY = "#F0F6FC"
+    SECONDARY = "#B1BAC4"
+    MUTED = "#6E7681"
+    SUBTLE = "#484F58"
+    RULE = "#30363D"
+    ACCENT = "#58A6FF"
+
+    SANS = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+    MONO = "ui-monospace, SFMono-Regular, 'Cascadia Code', Menlo, Consolas, monospace"
+
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-labelledby="title desc">
-  <title id="title">Vigneshwar Ramadoss — Co-Founder @ The Dot</title>
-  <desc id="desc">Technical Founder profile hero displaying Vigneshwar Ramadoss, Co-Founder @ The Dot, and the Problem to System to Build to Ship workflow.</desc>
+  <title id="title">Vigneshwar Ramadoss — Co-Founder · The Dot</title>
+  <desc id="desc">Vigneshwar Ramadoss, Co-Founder at The Dot. Product Engineering, AI + Automation, and Interaction Systems.</desc>
 
   <defs>
-    <!-- Background Grid -->
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="{T.BRIGHT}" stroke-opacity="0.03" stroke-width="1"/>
-      <circle cx="40" cy="40" r="1.5" fill="{T.BRIGHT}" fill-opacity="0.05"/>
-    </pattern>
-    
-    <linearGradient id="gridFade" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="{T.BG}" stop-opacity="1"/>
-      <stop offset="0.3" stop-color="{T.BG}" stop-opacity="0.9"/>
-      <stop offset="1" stop-color="{T.BG}" stop-opacity="0"/>
-    </linearGradient>
-
-    <radialGradient id="glow" cx="85%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="{T.ACCENT}" stop-opacity="0.06"/>
-      <stop offset="100%" stop-color="{T.BG}" stop-opacity="0"/>
+    <radialGradient id="rightGlow" cx="950" cy="220" r="380" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="{ACCENT}" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="{ACCENT}" stop-opacity="0"/>
     </radialGradient>
-
     <style>
-      .sans {{ font-family: {T.SANS}; }}
-      .mono {{ font-family: {T.MONO}; }}
-      
-      .fade-up {{ opacity: 0; animation: fUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }}
-      .fade-in {{ opacity: 0; animation: fIn 1.2s ease-out forwards; }}
-      .line-draw {{ stroke-dasharray: 200; stroke-dashoffset: 200; animation: drawL 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }}
-      .pulse {{ opacity: 0; animation: pNode 3s ease-in-out infinite; }}
-      .data-stream {{ stroke-dasharray: 4 12; stroke-dashoffset: 0; animation: stream 15s linear infinite; }}
-      
-      .d-1 {{ animation-delay: 0.1s; }}
-      .d-2 {{ animation-delay: 0.2s; }}
-      .d-3 {{ animation-delay: 0.4s; }}
-      .d-4 {{ animation-delay: 0.6s; }}
-      .d-5 {{ animation-delay: 0.8s; }}
-      
-      @keyframes fUp {{ from {{ opacity: 0; transform: translateY(12px); }} to {{ opacity: 1; transform: translateY(0); }} }}
-      @keyframes fIn {{ to {{ opacity: 1; }} }}
-      @keyframes drawL {{ to {{ stroke-dashoffset: 0; }} }}
-      @keyframes pNode {{ 0%, 100% {{ opacity: 0.4; stroke-width: 1; }} 50% {{ opacity: 1; stroke-width: 1.5; }} }}
-      @keyframes stream {{ to {{ stroke-dashoffset: -200; }} }}
-      
-      @media (prefers-reduced-motion: reduce) {{
-        .fade-up, .fade-in, .line-draw, .pulse, .data-stream {{ animation: none !important; opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }}
-      }}
+      .sans {{ font-family: {SANS}; }}
+      .mono {{ font-family: {MONO}; }}
     </style>
   </defs>
 
-  <!-- Base layer -->
-  <rect width="{W}" height="{H}" fill="{T.BG}"/>
-  
-  <!-- Right-side Grid & Glow -->
-  <rect x="500" y="0" width="700" height="{H}" fill="url(#grid)"/>
-  <rect x="500" y="0" width="700" height="{H}" fill="url(#gridFade)"/>
-  <rect width="{W}" height="{H}" fill="url(#glow)"/>
-  
-  <!-- Faint Border -->
-  <rect x="1" y="1" width="{W-2}" height="{H-2}" rx="{T.RADIUS}" fill="none" stroke="{T.BRIGHT}" stroke-opacity="0.04"/>
+  <!-- Background Canvas -->
+  <rect width="{W}" height="{H}" rx="12" fill="{BG}"/>
+  <rect width="{W}" height="{H}" rx="12" fill="url(#rightGlow)"/>
+  <rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="11.5" fill="none" stroke="{RULE}" stroke-opacity="0.35"/>
 
-  <!-- ==========================================
-       LEFT SIDE: IDENTITY (55%)
-       ========================================== -->
-       
-  <!-- Metadata Top -->
-  <g class="mono fade-in d-1" font-size="11" letter-spacing="2">
-    <text x="80" y="64" fill="{T.MUTED}">ID /</text>
-    <text x="120" y="64" fill="{T.INK}">VIGNESHWAR_RAMADOSS</text>
+  <!-- ======================================================== -->
+  <!-- LEFT REGION: IDENTITY, POSITIONING, FOCUS (x=64..650)    -->
+  <!-- ======================================================== -->
+
+  <!-- 01 Name -->
+  <text class="sans" x="64" y="112" fill="{PRIMARY}" font-size="46" font-weight="700" letter-spacing="-0.025em">Vigneshwar Ramadoss</text>
+
+  <!-- 02 Role & Company -->
+  <text class="sans" x="64" y="152" font-size="15" font-weight="500" letter-spacing="0.01em">
+    <tspan fill="{MUTED}">Co-Founder</tspan>
+    <tspan fill="{SUBTLE}"> · </tspan>
+    <tspan fill="{ACCENT}" font-weight="600">The Dot</tspan>
+  </text>
+
+  <!-- 03 Positioning Statement -->
+  <text class="sans" x="64" y="218" fill="{PRIMARY}" font-size="19" font-weight="400" letter-spacing="-0.01em">
+    <tspan x="64" dy="0">Turning business problems into</tspan>
+    <tspan x="64" dy="28">digital products, systems</tspan>
+    <tspan x="64" dy="28" fill="{SECONDARY}">and high-performance experiences.</tspan>
+  </text>
+
+  <!-- 04 Focus Disciplines (Quiet Typographic Stack) -->
+  <g transform="translate(64, 340)">
+    <!-- Item 01 -->
+    <text class="mono" x="0" y="0" fill="{MUTED}" font-size="11" font-weight="500">01</text>
+    <text class="mono" x="24" y="0" fill="{SUBTLE}" font-size="11">·</text>
+    <text class="sans" x="38" y="0" fill="{SECONDARY}" font-size="12" font-weight="600" letter-spacing="0.06em">PRODUCT ENGINEERING</text>
+
+    <!-- Item 02 -->
+    <text class="mono" x="0" y="22" fill="{MUTED}" font-size="11" font-weight="500">02</text>
+    <text class="mono" x="24" y="22" fill="{SUBTLE}" font-size="11">·</text>
+    <text class="sans" x="38" y="22" fill="{SECONDARY}" font-size="12" font-weight="600" letter-spacing="0.06em">AI + AUTOMATION</text>
+
+    <!-- Item 03 -->
+    <text class="mono" x="0" y="44" fill="{MUTED}" font-size="11" font-weight="500">03</text>
+    <text class="mono" x="24" y="44" fill="{SUBTLE}" font-size="11">·</text>
+    <text class="sans" x="38" y="44" fill="{SECONDARY}" font-size="12" font-weight="600" letter-spacing="0.06em">INTERACTION SYSTEMS</text>
   </g>
 
-  <g class="fade-up d-1">
-    <!-- Name -->
-    <text class="sans" x="80" y="126" fill="{T.BRIGHT}" font-size="52" font-weight="600" letter-spacing="-1.2">Vigneshwar Ramadoss</text>
-    
-    <!-- Role -->
-    <text class="mono" x="80" y="166" fill="{T.ACCENT}" font-size="12" font-weight="600" letter-spacing="1.5">CO-FOUNDER @ THE DOT</text>
+  <!-- ======================================================== -->
+  <!-- RIGHT REGION: ARCHITECTURAL INDEX SYSTEM (x=760..1136)   -->
+  <!-- ======================================================== -->
 
-    <!-- Positioning -->
-    <text class="sans" x="80" y="222" fill="{T.BRIGHT}" font-size="18" font-weight="400" letter-spacing="-0.1">
-      <tspan x="80" dy="0">Turning business problems into products, systems</tspan>
-      <tspan x="80" dy="28" fill="{T.INK}">and high-performance digital experiences.</tspan>
-    </text>
-
-    <!-- Focus -->
-    <g class="mono" font-size="11.5" letter-spacing="1.2">
-      <text x="80" y="294" fill="{T.MUTED}">FOCUS /</text>
-      <text x="144" y="294" fill="{T.INK}">PRODUCT DEV</text>
-      <text x="240" y="294" fill="{T.MUTED}">·</text>
-      <text x="256" y="294" fill="{T.INK}">DIGITAL TRANSFORMATION</text>
-      <text x="448" y="294" fill="{T.MUTED}">·</text>
-      <text x="464" y="294" fill="{T.INK}">APPLIED AI</text>
-    </g>
+  <!-- Row 01: PROBLEM -->
+  <g transform="translate(760, 112)">
+    <text class="mono" x="0" y="0" fill="{MUTED}" font-size="12" font-weight="500">01</text>
+    <text class="sans" x="42" y="0" fill="{SECONDARY}" font-size="20" font-weight="600" letter-spacing="0.08em">PROBLEM</text>
+    <line x1="184" y1="-6" x2="376" y2="-6" stroke="{RULE}" stroke-opacity="0.6" stroke-width="1"/>
   </g>
 
-  <!-- Status Bottom -->
-  <g class="mono fade-in d-2" font-size="11" letter-spacing="1.5">
-    <circle cx="84" cy="344" r="3.5" fill="{T.ACCENT}"/>
-    <circle class="pulse d-2" cx="84" cy="344" r="5" fill="none" stroke="{T.ACCENT}"/>
-    <text x="100" y="348" fill="{T.MUTED}">STATUS:</text>
-    <text x="160" y="348" fill="{T.BRIGHT}" font-weight="600">SYSTEM ONLINE</text>
+  <!-- Row 02: SYSTEM -->
+  <g transform="translate(760, 180)">
+    <text class="mono" x="0" y="0" fill="{MUTED}" font-size="12" font-weight="500">02</text>
+    <text class="sans" x="42" y="0" fill="{SECONDARY}" font-size="20" font-weight="600" letter-spacing="0.08em">SYSTEM</text>
+    <line x1="184" y1="-6" x2="376" y2="-6" stroke="{RULE}" stroke-opacity="0.6" stroke-width="1"/>
   </g>
 
-
-  <!-- ==========================================
-       RIGHT SIDE: SYSTEM VISUALIZATION (45%)
-       ========================================== -->
-       
-  <g class="fade-up d-3" transform="translate(850, 0)">
-    
-    <!-- Metadata Top Right -->
-    <g class="mono" font-size="11" letter-spacing="2" text-anchor="middle">
-      <text x="50" y="64" fill="{T.MUTED}">SYSTEM ARCHITECTURE</text>
-    </g>
-
-    <!-- Vertical Lines -->
-    <g fill="none" stroke="{T.FRAME}" stroke-width="1.5">
-      <path class="line-draw d-3" d="M 50 118 L 50 152"/>
-      <path class="line-draw d-4" d="M 50 178 L 50 212"/>
-      <path class="line-draw d-5" d="M 50 238 L 50 272"/>
-    </g>
-    
-    <!-- Animated Data Flow -->
-    <path class="data-stream" d="M 50 100 L 50 300" fill="none" stroke="{T.ACCENT}" stroke-width="1.5" stroke-opacity="0.3"/>
-
-    <!-- 01 PROBLEM -->
-    <g transform="translate(50, 106)">
-      <!-- Box/Node container -->
-      <rect x="-80" y="-12" width="160" height="24" rx="4" fill="{T.BG}" stroke="{T.FRAME}" stroke-width="1"/>
-      <g class="mono" font-size="11" letter-spacing="1.5" text-anchor="middle">
-        <text x="-32" y="4" fill="{T.MUTED}">01</text>
-        <text x="16" y="4" fill="{T.INK}" font-weight="600">PROBLEM</text>
-      </g>
-    </g>
-
-    <!-- Down Arrow 1 -->
-    <path class="fade-in d-4" d="M 46 148 L 50 153 L 54 148" fill="none" stroke="{T.MUTED}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-
-    <!-- 02 SYSTEM -->
-    <g transform="translate(50, 166)">
-      <rect x="-80" y="-12" width="160" height="24" rx="4" fill="{T.BG}" stroke="{T.FRAME}" stroke-width="1"/>
-      <g class="mono" font-size="11" letter-spacing="1.5" text-anchor="middle">
-        <text x="-32" y="4" fill="{T.MUTED}">02</text>
-        <text x="16" y="4" fill="{T.INK}" font-weight="600">SYSTEM</text>
-      </g>
-    </g>
-
-    <!-- Down Arrow 2 -->
-    <path class="fade-in d-5" d="M 46 208 L 50 213 L 54 208" fill="none" stroke="{T.MUTED}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-
-    <!-- 03 BUILD (Active) -->
-    <g transform="translate(50, 226)">
-      <!-- Active Glow -->
-      <rect x="-80" y="-12" width="160" height="24" rx="4" fill="{T.ACCENT}" fill-opacity="0.08"/>
-      <rect x="-80" y="-12" width="160" height="24" rx="4" fill="none" stroke="{T.ACCENT}" stroke-width="1.5"/>
-      <g class="mono" font-size="11" letter-spacing="1.5" text-anchor="middle">
-        <text x="-32" y="4" fill="{T.ACCENT}">03</text>
-        <text x="16" y="4" fill="{T.BRIGHT}" font-weight="700">BUILD</text>
-      </g>
-      <!-- Pulse dot indicator on the side -->
-      <circle cx="-68" cy="0" r="3" fill="{T.ACCENT}"/>
-      <circle class="pulse d-5" cx="-68" cy="0" r="4.5" fill="none" stroke="{T.ACCENT}"/>
-    </g>
-
-    <!-- Down Arrow 3 -->
-    <path class="fade-in d-5" d="M 46 268 L 50 273 L 54 268" fill="none" stroke="{T.MUTED}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-
-    <!-- 04 SHIP -->
-    <g transform="translate(50, 286)">
-      <rect x="-80" y="-12" width="160" height="24" rx="4" fill="{T.BG}" stroke="{T.FRAME}" stroke-width="1"/>
-      <g class="mono" font-size="11" letter-spacing="1.5" text-anchor="middle">
-        <text x="-32" y="4" fill="{T.MUTED}">04</text>
-        <text x="16" y="4" fill="{T.INK}" font-weight="600">SHIP</text>
-      </g>
-    </g>
-
+  <!-- Row 03: BUILD (Active / Primary Accent) -->
+  <g transform="translate(760, 248)">
+    <text class="mono" x="0" y="0" fill="{ACCENT}" font-size="12" font-weight="600">03</text>
+    <text class="sans" x="42" y="0" fill="{ACCENT}" font-size="20" font-weight="700" letter-spacing="0.08em">BUILD</text>
+    <line x1="184" y1="-6" x2="376" y2="-6" stroke="{ACCENT}" stroke-opacity="0.9" stroke-width="1.5"/>
   </g>
-  
+
+  <!-- Row 04: SHIP -->
+  <g transform="translate(760, 316)">
+    <text class="mono" x="0" y="0" fill="{MUTED}" font-size="12" font-weight="500">04</text>
+    <text class="sans" x="42" y="0" fill="{SECONDARY}" font-size="20" font-weight="600" letter-spacing="0.08em">SHIP</text>
+    <line x1="184" y1="-6" x2="376" y2="-6" stroke="{RULE}" stroke-opacity="0.6" stroke-width="1"/>
+  </g>
+
+  <!-- Operating Signature (Bottom Right) -->
+  <text class="mono" x="760" y="384" fill="{MUTED}" font-size="11" letter-spacing="0.1em">Problem → System → Build → Ship</text>
+
 </svg>"""
     return svg
 
